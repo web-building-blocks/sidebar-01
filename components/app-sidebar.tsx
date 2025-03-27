@@ -1,4 +1,66 @@
+// // components/app-sidebar.tsx
+// import {
+//   Sidebar,
+//   SidebarContent,
+//   SidebarHeader,
+//   SidebarGroup,
+//   SidebarGroupLabel,
+//   SidebarGroupContent,
+//   SidebarMenu,
+//   SidebarMenuItem,
+//   SidebarMenuButton,
+//   SidebarRail,
+// } from "@/components/ui/sidebar"
+// import { SidebarProvider } from "@/components/ui/sidebar"
+// import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
+// import Link from "next/link"
+
+// export function AppSidebar() {
+//   return (
+//     <Sidebar>
+//       <SidebarHeader>
+//         <Breadcrumb>
+//           <BreadcrumbList>
+//             <BreadcrumbItem>
+//               <Link href="/">Home</Link>
+//             </BreadcrumbItem>
+//             <BreadcrumbSeparator />
+//             <BreadcrumbItem>
+//               <BreadcrumbPage>Docs</BreadcrumbPage>
+//             </BreadcrumbItem>
+//           </BreadcrumbList>
+//         </Breadcrumb>
+//       </SidebarHeader>
+
+//       <SidebarContent>
+//         <SidebarGroup>
+//           <SidebarGroupLabel>Building Your Application</SidebarGroupLabel>
+//           <SidebarGroupContent>
+//             <SidebarMenu>
+//               <SidebarMenuItem>
+//                 <SidebarMenuButton asChild>
+//                   <Link href="/docs/routing">Routing</Link>
+//                 </SidebarMenuButton>
+//               </SidebarMenuItem>
+//               <SidebarMenuItem>
+//                 <SidebarMenuButton asChild>
+//                   <Link href="/docs/data-fetching">Data Fetching</Link>
+//                 </SidebarMenuButton>
+//               </SidebarMenuItem>
+//             </SidebarMenu>
+//           </SidebarGroupContent>
+//         </SidebarGroup>
+//       </SidebarContent>
+
+//       <SidebarRail />
+//     </Sidebar>
+//   )
+// }
+
+
+
 import * as React from "react"
+import Link from "next/link"
 
 import { SearchForm } from "@/components/search-form"
 import { VersionSwitcher } from "@/components/version-switcher"
@@ -39,11 +101,11 @@ const data = {
       items: [
         {
           title: "Routing",
-          url: "#",
+          url: "/docs/routing",
         },
         {
           title: "Data Fetching",
-          url: "#",
+          url: "/docs/data-fetching",
           isActive: true,
         },
         {
@@ -166,9 +228,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
               <SidebarMenu>
                 {item.items.map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild isActive={item.isActive}>
-                      <a href={item.url}>{item.title}</a>
-                    </SidebarMenuButton>
+                    <SidebarMenuButton asChild>
+                    <Link href={item.url}>{item.title}</Link>
+                  </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
               </SidebarMenu>
