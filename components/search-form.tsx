@@ -2,13 +2,14 @@
 
 import { Search } from "lucide-react"
 import React, { useState } from "react"
-import { useRouter } from "next/navigation"
 import { Label } from "@/components/ui/label"
 import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarInput,
 } from "@/components/ui/sidebar"
+import { usePathname, useRouter } from "next/navigation"
+
 
 const pages = [
   { name: "Installation", path: "/getting-started/installation" },
@@ -30,18 +31,26 @@ const pages = [
 export function SearchForm({ ...props }: React.ComponentProps<"form">) {
   const [query, setQuery] = useState("");
   const router = useRouter(); 
+  const pathname = usePathname()
+  const versionMatch = pathname.match(/^\/(v[\d\w.-]+)/)
+  const versionPrefix = versionMatch ? `/${versionMatch[1]}` : ""
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const matchedPage = pages.find((page) =>
+    e.preventDefault()
+  
+    
+  
+    const pathMatch = pages.find((page) =>
       page.name.toLowerCase().includes(query.toLowerCase())
-    );
-    if (matchedPage) {
-      router.push(matchedPage.path); 
+    )
+  
+    if (pathMatch) {
+      router.push(`${versionPrefix}${pathMatch.path}`)
     } else {
-      alert("No matching page found!");
+      alert("No matching page found!")
     }
-  };
+  }
+  
 
   return (
     <form {...props} onSubmit={handleSubmit}>
@@ -55,7 +64,7 @@ export function SearchForm({ ...props }: React.ComponentProps<"form">) {
             placeholder="Search the docs..."
             className="pl-8"
             value={query}
-            onChange={(e) => setQuery(e.target.value)} // ✅ 绑定输入框的值
+            onChange={(e) => setQuery(e.target.value)}
           />
           <Search className="pointer-events-none absolute top-1/2 left-2 size-4 -translate-y-1/2 opacity-50 select-none" />
         </SidebarGroupContent>

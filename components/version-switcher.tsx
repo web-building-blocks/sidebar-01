@@ -15,6 +15,8 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 
+import { usePathname, useRouter } from "next/navigation"
+
 export function VersionSwitcher({
   versions,
   defaultVersion,
@@ -22,7 +24,23 @@ export function VersionSwitcher({
   versions: string[]
   defaultVersion: string
 }) {
-  const [selectedVersion, setSelectedVersion] = React.useState(defaultVersion)
+  const pathname = usePathname()
+  const router = useRouter()
+
+  // ✅ 从 URL 中提取当前版本号
+  const getVersionFromPath = (path: string) => {
+    const match = path.match(/^\/(v[\d\w.\-]+)/)
+    return match ? match[1] : defaultVersion
+  }
+
+  // ✅ 状态同步 URL 中的版本
+  const [selectedVersion, setSelectedVersion] = React.useState(() => getVersionFromPath(pathname))
+
+  // ✅ 当 URL 变化时，自动更新当前选中版本
+  React.useEffect(() => {
+    const version = getVersionFromPath(pathname)
+    setSelectedVersion(version)
+  }, [pathname])
 
   return (
     <SidebarMenu>
@@ -38,22 +56,25 @@ export function VersionSwitcher({
               </div>
               <div className="flex flex-col gap-0.5 leading-none">
                 <span className="font-medium">Documentation</span>
-                <span className="">v{selectedVersion}</span>
+                <span className="">{selectedVersion}</span>
               </div>
               <ChevronsUpDown className="ml-auto" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width)"
+            className="w-[--radix-dropdown-menu-trigger-width]"
             align="start"
           >
             {versions.map((version) => (
               <DropdownMenuItem
                 key={version}
-                onSelect={() => setSelectedVersion(version)}
+                onSelect={() => {
+                  const currentPath = pathname.replace(/^\/v[\d\w.\-]+/, "")
+                  router.push(`/v${version}${currentPath}`)
+                }}
               >
-                v{version}{" "}
-                {version === selectedVersion && <Check className="ml-auto" />}
+                {version === selectedVersion && <Check className="mr-2" />}
+                {version}
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>
