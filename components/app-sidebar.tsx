@@ -101,11 +101,11 @@ const data = {
       items: [
         {
           title: "Routing",
-          url: "/docs/routing",
+          url: "/building-your-application/routing",
         },
         {
           title: "Data Fetching",
-          url: "/docs/data-fetching",
+          url: "/building-your-application/data-fetching",
           isActive: true,
         },
         {
