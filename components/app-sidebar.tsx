@@ -1,64 +1,3 @@
-// // components/app-sidebar.tsx
-// import {
-//   Sidebar,
-//   SidebarContent,
-//   SidebarHeader,
-//   SidebarGroup,
-//   SidebarGroupLabel,
-//   SidebarGroupContent,
-//   SidebarMenu,
-//   SidebarMenuItem,
-//   SidebarMenuButton,
-//   SidebarRail,
-// } from "@/components/ui/sidebar"
-// import { SidebarProvider } from "@/components/ui/sidebar"
-// import { Breadcrumb, BreadcrumbItem, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
-// import Link from "next/link"
-
-// export function AppSidebar() {
-//   return (
-//     <Sidebar>
-//       <SidebarHeader>
-//         <Breadcrumb>
-//           <BreadcrumbList>
-//             <BreadcrumbItem>
-//               <Link href="/">Home</Link>
-//             </BreadcrumbItem>
-//             <BreadcrumbSeparator />
-//             <BreadcrumbItem>
-//               <BreadcrumbPage>Docs</BreadcrumbPage>
-//             </BreadcrumbItem>
-//           </BreadcrumbList>
-//         </Breadcrumb>
-//       </SidebarHeader>
-
-//       <SidebarContent>
-//         <SidebarGroup>
-//           <SidebarGroupLabel>Building Your Application</SidebarGroupLabel>
-//           <SidebarGroupContent>
-//             <SidebarMenu>
-//               <SidebarMenuItem>
-//                 <SidebarMenuButton asChild>
-//                   <Link href="/docs/routing">Routing</Link>
-//                 </SidebarMenuButton>
-//               </SidebarMenuItem>
-//               <SidebarMenuItem>
-//                 <SidebarMenuButton asChild>
-//                   <Link href="/docs/data-fetching">Data Fetching</Link>
-//                 </SidebarMenuButton>
-//               </SidebarMenuItem>
-//             </SidebarMenu>
-//           </SidebarGroupContent>
-//         </SidebarGroup>
-//       </SidebarContent>
-
-//       <SidebarRail />
-//     </Sidebar>
-//   )
-// }
-
-
-
 import * as React from "react"
 import Link from "next/link"
 
@@ -87,11 +26,11 @@ const data = {
       items: [
         {
           title: "Installation",
-          url: "#",
+          url: "/getting-started/installation",
         },
         {
           title: "Project Structure",
-          url: "#",
+          url: "/getting-started/project-structure",
         },
       ],
     },

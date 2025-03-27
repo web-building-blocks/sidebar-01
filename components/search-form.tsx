@@ -11,8 +11,8 @@ import {
 } from "@/components/ui/sidebar"
 
 const pages = [
-  { name: "Installation", path: "/building-your-application/installation" },
-  { name: "Project Structure", path: "/building-your-application/project-structure" },
+  { name: "Installation", path: "/getting-started/installation" },
+  { name: "Project Structure", path: "/getting-started/project-structure" },
   { name: "Data Fetching", path: "/building-your-application/data-fetching" },
   { name: "Routing", path: "/building-your-application/routing" },
   // { name: "Rendering", path: "/building-your-application/rendering" },
@@ -29,7 +29,7 @@ const pages = [
 
 export function SearchForm({ ...props }: React.ComponentProps<"form">) {
   const [query, setQuery] = useState("");
-  const router = useRouter(); // ✅ 用于跳转
+  const router = useRouter(); 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -37,7 +37,7 @@ export function SearchForm({ ...props }: React.ComponentProps<"form">) {
       page.name.toLowerCase().includes(query.toLowerCase())
     );
     if (matchedPage) {
-      router.push(matchedPage.path); // ✅ 直接跳转
+      router.push(matchedPage.path); 
     } else {
       alert("No matching page found!");
     }
